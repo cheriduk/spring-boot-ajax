@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OtherReturn</title>
+</head>
+<body>
+
+
+<script type="text/javascript" src="/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //发送Ajax请求
+        $.ajax({
+            url:"/otherType/string",
+            type:"post",
+            data:{"id":12},
+            dataType:"json",
+            success:function(data){
+                //data是服务器返回的数据
+                alert(data.name);
+            },
+            error:function(e){
+                alert(e);//异常信息
+            }
+        });
+    });
+</script>
+</body>
+</html>

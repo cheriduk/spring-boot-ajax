@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查询所有User数据</title>
+</head>
+<body>
+<div style="width: 1000px;" align="center">
+    <h3 align="center">第一个Ajax项目</h3>
+    <table width="100%" border="1" cellspacing="1" cellpadding="0">
+        <tr>
+            <td>ID  </td>
+            <td>姓名</td>
+            <td>年龄</td>
+        </tr>
+
+        <!--/*@thymesVar id="lists" type=""*/-->
+        <tr  th:each="user : ${userList}">
+            <td th:text="${user.id}">22</td>
+            <td th:text="${user.name}">作者</td>
+            <td th:text="${user.age}">22</td>
+        </tr>
+    </table>
+</div>
+
+<hr>
+
+<div style="width: 1000px;" align="center">
+    <form>
+        ID   :<input type="text" id="id" value=""><br>
+        姓名：<input type="text" id="name" value=""><br>
+        年龄：<input type="text" id="age" value=""><br>
+        <input type="button" value="提交" onclick="submitCl()">
+    </form>
+</div>
+
+
+<script type="text/javascript" src="/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    function submitCl() {
+
+        //获取请求参数
+        var id = $("#id").val();
+        alert(id);
+
+        if(id==''){
+            alert("请输入查询的id");
+        }
+
+        //发送Ajax请求
+        $.ajax({
+            url:"/user/ajax",
+            type:"post",
+            data:{"userid":id},
+            dataType:"json",
+            success:function(data){
+                //data是服务器返回的数据
+                alert(data.user.name);
+            },
+            error:function(e){
+                alert(e);//异常信息
+            }
+        });
+    }
+</script>
+</body>
+</html>
